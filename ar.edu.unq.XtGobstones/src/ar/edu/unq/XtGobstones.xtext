@@ -1,0 +1,54 @@
+grammar ar.edu.unq.XtGobstones with org.eclipse.xtext.common.Terminals
+
+generate xtGobstones "http://www.edu.ar/unq/XtGobstones"
+
+Model:
+	defs+=Def*
+;
+	
+Def:
+	Program | Procedure
+;
+
+Program:
+	{Program} 'program' '{' commands=Command* '}'
+;
+
+Procedure:
+	'procedure' name=UPPER_ID '(' parameters=Parameter* ')' '{' commands=Command* '}'
+;
+
+Parameter:
+	{Parameter} LOWER_ID
+;
+
+Command: 
+	BuiltInCommand | {Procedure}
+;
+
+BuiltInCommand:
+	Poner | Sacar | Mover
+;
+
+Poner:
+	{Poner} 'Poner' '(' Color ')'
+;
+
+Sacar:
+	{Sacar} 'Sacar' '(' Color ')'
+;
+
+Mover:
+	{Mover} 'Mover' '(' Direccion ')'
+;
+
+Color:
+	'Azul' | 'Rojo' | 'Negro' | 'Verde'
+;
+
+Direccion:
+	'Norte' | 'Oeste' | 'Sur' | 'Este'
+;
+
+terminal LOWER_ID: ('a'..'z') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+terminal UPPER_ID: ('A'..'Z') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
