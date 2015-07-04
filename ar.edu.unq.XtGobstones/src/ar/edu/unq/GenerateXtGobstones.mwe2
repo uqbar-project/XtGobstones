@@ -5,7 +5,7 @@ import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
 var grammarURI = "classpath:/ar/edu/unq/XtGobstones.xtext"
-var fileExtensions = "XtGobstones"
+var fileExtensions = "gbs"
 var projectName = "ar.edu.unq.XtGobstones"
 var runtimeProject = "../${projectName}"
 var generateXtendStub = true
