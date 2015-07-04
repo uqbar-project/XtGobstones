@@ -12,7 +12,9 @@ Program:
 ;
 
 Procedure:
-	'procedure' name=UPPER_ID // '(' parameters+=Parameter* ')' '{' commands+=Command* '}'
+	'procedure' name=UPPER_ID '(' ')' '{' 
+		commands+=Command* 
+	'}'
 ;
 
 Parameter:
@@ -28,7 +30,7 @@ ProcedureInvocation:
 ;
 
 BuiltInCommand:
-	Poner // | Sacar | Mover
+	Poner | Sacar | Mover
 ;
 
 Poner:
@@ -43,13 +45,8 @@ Mover:
 	'Mover' '(' direccion=DIRECCION')'
 ;
 
-COLOR:
-	'Azul' | 'Rojo' | 'Negro' | 'Verde'
-;
-
-DIRECCION:
-	'Norte' | 'Oeste' | 'Sur' | 'Este'
-;
+terminal COLOR: 'Azul' | 'Rojo' | 'Negro' | 'Verde';
+terminal DIRECCION: 'Norte' | 'Oeste' | 'Sur' | 'Este';
 
 terminal LOWER_ID: ('a'..'z') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 terminal UPPER_ID: ('A'..'Z') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
