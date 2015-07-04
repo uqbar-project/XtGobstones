@@ -3,50 +3,51 @@ grammar ar.edu.unq.XtGobstones with org.eclipse.xtext.common.Terminals
 generate xtGobstones "http://www.edu.ar/unq/XtGobstones"
 
 Model:
-	defs+=Def*
+	defs+=Procedure*
+	program=Program
 ;
 	
-Def:
-	Program | Procedure
-;
-
 Program:
-	{Program} 'program' '{' commands=Command* '}'
+	{Program} 'program' '{' commands+=Command* '}'
 ;
 
 Procedure:
-	'procedure' name=UPPER_ID '(' parameters=Parameter* ')' '{' commands=Command* '}'
+	'procedure' name=UPPER_ID // '(' parameters+=Parameter* ')' '{' commands+=Command* '}'
 ;
 
 Parameter:
-	{Parameter} LOWER_ID
+	{Parameter} name=LOWER_ID
 ;
 
 Command: 
-	BuiltInCommand | {Procedure}
+	BuiltInCommand | ProcedureInvocation
+;
+
+ProcedureInvocation:
+	procedure=[Procedure] '(' ')' // Acá después poner arguments pero para eso necesitás expressions
 ;
 
 BuiltInCommand:
-	Poner | Sacar | Mover
+	Poner // | Sacar | Mover
 ;
 
 Poner:
-	{Poner} 'Poner' '(' Color ')'
+	'Poner' '(' color=COLOR ')'
 ;
 
 Sacar:
-	{Sacar} 'Sacar' '(' Color ')'
+	'Sacar' '(' color=COLOR ')'
 ;
 
 Mover:
-	{Mover} 'Mover' '(' Direccion ')'
+	'Mover' '(' direccion=DIRECCION')'
 ;
 
-Color:
+COLOR:
 	'Azul' | 'Rojo' | 'Negro' | 'Verde'
 ;
 
-Direccion:
+DIRECCION:
 	'Norte' | 'Oeste' | 'Sur' | 'Este'
 ;
 
